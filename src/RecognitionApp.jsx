@@ -18,7 +18,7 @@ export class Recognizer extends React.Component {
 
             <div>
                 <p id="phraseWidget" className={styles.phrase}>Phrase...</p>
-                <p class="result">Right or wrong?</p>
+                <p>Right or wrong?</p>
                 <p id="outputWidget" className={styles.output}>...diagnostic messages</p>
             </div>            
         </div> )
