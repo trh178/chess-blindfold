@@ -7,6 +7,7 @@ import Select from 'react-select'
 import { AppNavbar } from './AppNavbar.jsx';
 import { List } from 'immutable';
 import { Board, MoveTable } from './ChessApp.jsx';
+import { Recognizer } from './RecognitionApp.jsx';
 
 import { GameClient, startingFen, gameStatus } from './helpers.jsx'
 import { getBest } from './engine.js'
@@ -319,16 +320,7 @@ export class App extends React.Component {
       </Row>
     </div>
   )
-  sttElement = () => (
-    <div>
-      <button>Start new test</button>
-      <div>
-          <p class="phrase">Phrase...</p>
-          <p class="result">Right or wrong?</p>
-          <p class="output">...diagnostic messages</p>
-      </div>      
-    </div>
-  )
+  sttElement = () => <Recognizer />
   boardElement = () => <Board fen={ this.state.gameClient.client.fen() }/>
   handleChange = value => this.setState({ showType: value })
   moveTableElement = () => <MoveTable pgn={ this.state.gameClient.client.pgn() }/>
