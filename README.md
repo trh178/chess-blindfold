@@ -1,30 +1,18 @@
-# Blindfold chess
+# Blindfold Chess with Speech Layer
 
-This is an app to train you in playing blindfold. Think of it as stockfish without the board. You see all possible moves and click on a move to make it.
+This is an attempt at adding a speech layer on top of an existing blindfold chess app. 
 
-The app is optimized for mobile play and aims to be as simple as possible. You should just be able to click to play.
+* Original App: https://github.com/cgoldammer/chess-blindfold
+* MDN Web Speech API docs: https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API
+* JSGF Grammar for Chess: https://cmusphinx.github.io/data/chess/ExtendedEssay.pdf
 
-# Features
+# Setup
 
-- Show the board if you can't fully remember the position
-- Change the stockfish difficulty
-- Provide different display options for possible moves. For instance, don't show whether a move is taking a piece, which makes the game harder.
+1. Clone the repo
+2. `npm install`
+3. `wget -O lib/stockfish.js "https://github.com/exoticorn/stockfish-js/releases/download/sf_5_js/stockfish.js"`
+4. `npm run build`
+5. `npm run start`
 
-# Possible improvements
-
-Note: I'm not actively developing this library, but always happy for others to submit PRs and will review them.
-
-- Rewind moves by clicking on the list of moves
-- Show board with only pawn structure
-- Ask questions about position (e.g. what are the fields for the white pawns?)
-- Store results so you can find out whether you are improving
-
-# Help
-
-I'm always greateful for collaborators!
-
-# Compiling the code
-
-To compile the app, you need to run the `setup.sh` script. The main task of the script is to download compiled code for Stockfish.js.
 
 
