@@ -289,6 +289,7 @@ export class App extends React.Component {
       case "moves": return this.moveTableElement()
       case "board": return this.boardElement()
       case "settings": return this.settingsElement()
+      case "stt": return this.sttElement()
     }
   }
   getLastMove = (offsetTrue, offsetFalse) => () => {
@@ -316,6 +317,16 @@ export class App extends React.Component {
           </Col>
         }
       </Row>
+    </div>
+  )
+  sttElement = () => (
+    <div>
+      <button>Start new test</button>
+      <div>
+          <p class="phrase">Phrase...</p>
+          <p class="result">Right or wrong?</p>
+          <p class="output">...diagnostic messages</p>
+      </div>      
     </div>
   )
   boardElement = () => <Board fen={ this.state.gameClient.client.fen() }/>
@@ -349,6 +360,7 @@ export class App extends React.Component {
                   <ToggleButton value={"moves"}>Moves</ToggleButton>
                   <ToggleButton value={"board"}>Board</ToggleButton>
                   <ToggleButton value={"settings"}>Settings</ToggleButton>
+                  <ToggleButton value={"stt"}>Recognition</ToggleButton>
                 </ToggleButtonGroup>
               </Row>
               <div style={{ marginTop: 10 }}>
