@@ -3,10 +3,26 @@ import ReactTable from 'react-table';
 import { Table, ToggleButtonGroup, ToggleButton, ButtonGroup, Panel, ListGroup, ListGroupItem, Navbar, Nav, NavItem, NavDropdown, Grid, Row, Col, Button, DropdownButton, MenuItem, FormControl, Breadcrumb, Modal } from 'react-bootstrap';
 import styles from './SynthesizeApp.css'
 
+const synth = window.speechSynthesis
+
 export class Synthesizer extends React.Component {
     constructor(props) {
         super(props)
         this.state = { speechText: '', warning: null }
+    }
+
+    speak = phrase => {
+        if(synth.speaking) {
+            console.error('speechSynthesis.speaking');
+            return;
+        }
+
+        if(phrase !== '') {
+            var utterThis = new SpeechSynthesisUtterance(phrase);
+            utterThis.pitch = 0.8;
+            utterThis.rate = 0.8;
+            synth.speak(utterThis);
+        }
     }
 
     setValue = value => this.setState({speechText: value})
@@ -16,7 +32,7 @@ export class Synthesizer extends React.Component {
             this.submit();
         }
     }
-    submit = () => this.playSpeech(this.state.value);
+    submit = () => this.speak(this.state.speechText);
     render = () => {
         return (
             <div>
@@ -30,7 +46,7 @@ export class Synthesizer extends React.Component {
                     type="text"
                     onChange={this.onChange}
                     onKeyPress={this.handleKeyPress}
-                    value={this.state.value}
+                    value={this.state.speechText}
                 />
                 <Col sm={2}>
                     <Button bsSize="large" id="submitButton" onClick={ this.submit }>Play</Button>

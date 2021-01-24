@@ -8,6 +8,7 @@ import { AppNavbar } from './AppNavbar.jsx';
 import { List } from 'immutable';
 import { Board, MoveTable } from './ChessApp.jsx';
 import { Recognizer } from './RecognitionApp.jsx';
+import { Synthesizer } from './SynthesizeApp.jsx';
 
 import { GameClient, startingFen, gameStatus } from './helpers.jsx'
 import { getBest } from './engine.js'
@@ -291,6 +292,7 @@ export class App extends React.Component {
       case "board": return this.boardElement()
       case "settings": return this.settingsElement()
       case "stt": return this.sttElement()
+      case "tts": return this.ttsElement()
     }
   }
   getLastMove = (offsetTrue, offsetFalse) => () => {
@@ -321,6 +323,7 @@ export class App extends React.Component {
     </div>
   )
   sttElement = () => <Recognizer />
+  ttsElement = () => <Synthesizer />
   boardElement = () => <Board fen={ this.state.gameClient.client.fen() }/>
   handleChange = value => this.setState({ showType: value })
   moveTableElement = () => <MoveTable pgn={ this.state.gameClient.client.pgn() }/>
@@ -353,6 +356,7 @@ export class App extends React.Component {
                   <ToggleButton value={"board"}>Board</ToggleButton>
                   <ToggleButton value={"settings"}>Settings</ToggleButton>
                   <ToggleButton value={"stt"}>Recognition</ToggleButton>
+                  <ToggleButton value={"tts"}>Synthesize</ToggleButton>
                 </ToggleButtonGroup>
               </Row>
               <div style={{ marginTop: 10 }}>
