@@ -3,6 +3,8 @@ import ReactTable from 'react-table';
 import { Table, ToggleButtonGroup, ToggleButton, ButtonGroup, Panel, ListGroup, ListGroupItem, Navbar, Nav, NavItem, NavDropdown, Grid, Row, Col, Button, DropdownButton, MenuItem, FormControl, Breadcrumb, Modal } from 'react-bootstrap';
 import styles from './RecognitionApp.css'
 
+import { Grammar, Grammer } from './grammar.jsx'
+
 const SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 const SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList
 
@@ -11,36 +13,21 @@ const speechRecognitionList = new SpeechGrammarList()
 
 export class Recognizer extends React.Component {
     constructor(props) {
-        super(props)
-
-        this.phrases = [
-            'I love to sing because it\'s fun',
-            'where are you going',
-            'can I call you tomorrow',
-            'why did you talk while I was talking',
-            'she enjoys reading books and playing games',
-            'where are you going',
-            'have a great day',
-            'she sells seashells on the seashore'
-        ];        
-    }
-    randomPhrase = () => {
-        var number = Math.floor(Math.random() * this.phrases.length);
-        return number;        
+        super(props)       
     }
     testSpeech = () => {
+        var grammar = new Grammar();
         var phraseElemnt = document.getElementById("phraseWidget");
         var resultElement = document.getElementById("resultWidget");
         var outputElement = document.getElementById("outputWidget");
 
-        var phrase = this.phrases[this.randomPhrase()];
-        phrase = phrase.toLowerCase();
+        var phrase = grammar.whichPhrase();
         phraseElemnt.textContent = phrase;
         resultElement.textContent = "right or wrong?";
         outputElement.textContent = "diagnostic msg";
 
-        var grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + phrase +';';
-        speechRecognitionList.addFromString(grammar, 1);
+        var gString = grammar.asString(phrase);
+        speechRecognitionList.addFromString(gString, 1);
         recognition.grammars = speechRecognitionList;
         recognition.lang = 'en-US';
         recognition.interimResults = false;
