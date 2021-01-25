@@ -16,17 +16,16 @@ export class Recognizer extends React.Component {
         super(props)       
     }
     testSpeech = () => {
-        var grammar = new Grammar();
         var phraseElemnt = document.getElementById("phraseWidget");
         var resultElement = document.getElementById("resultWidget");
         var outputElement = document.getElementById("outputWidget");
 
-        var phrase = grammar.whichPhrase();
-        phraseElemnt.textContent = phrase;
+        phraseElemnt.textContent = "a chess phrase"
         resultElement.textContent = "right or wrong?";
         outputElement.textContent = "diagnostic msg";
 
-        var gString = grammar.asString(phrase);
+        var grammar = new Grammar();
+        var gString = grammar.asString();
         speechRecognitionList.addFromString(gString, 1);
         recognition.grammars = speechRecognitionList;
         recognition.lang = 'en-US';
@@ -38,7 +37,7 @@ export class Recognizer extends React.Component {
         recognition.onresult = function(event) {
             var speechResult = event.results[0][0].transcript.toLowerCase();
             outputElement.textContent = 'Speech received: ' + speechResult + '.';
-            if(speechResult === phrase) {
+            if(speechResult === "test") {
                 resultElement.textContent = 'I heard the correct phrase!';
                 resultElement.style.background = 'lime';
             } else {

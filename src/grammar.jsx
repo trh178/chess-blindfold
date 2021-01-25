@@ -1,27 +1,26 @@
 export class Grammar {
-    constructor(props) {
-        this.phrases = [
-            'I love to sing because it\'s fun',
-            'where are you going',
-            'can I call you tomorrow',
-            'why did you talk while I was talking',
-            'she enjoys reading books and playing games',
-            'where are you going',
-            'have a great day',
-            'she sells seashells on the seashore'
-        ];         
+    constructor(props) {        
     }
-    randomPhrase = () => {
-        var number = Math.floor(Math.random() * this.phrases.length);
-        return number;        
-    }
-    whichPhrase = () => {
-        var phrase = this.phrases[this.randomPhrase()];
-        phrase = phrase.toLowerCase();
-        return phrase;
-    }
-    asString = gString => {
-        
-        return '#JSGF V1.0; grammar phrase; public <phrase> = ' + gString +';';
+    asString = () => {
+        return "\
+            #JSGF V1.0;\
+            grammar blindfold.chess.commands;\
+            <row> = one | two | three | four | five | six | seven | eight;\
+            <col> = a | b | c | d | e | f | g | h;\
+            <promote> = queen | rook | knight | bishop;\
+            <pair> = rook | knight | bishop;\
+            <ck> = check | checkmate;\
+            <eat> = captures | takes | capture | take;\
+            <menu_command> = resign |\
+                [please] show [board] position |\
+                new game\
+                exit [[the] program];\
+            <move_command> = queen [<eat>] <col> <row> [<ck>] |\
+                king [<eat>] <col> <row> |\
+                castle | castle king side | castle queen side |\
+                <pair> [<col>|<row>] [<eat>] <col> <row> [<ck>] |\
+                [pawn] [<eat>] <col> <row> [<promote>] [<check>];\
+            public <command> = <menu_command> | <move_command>;\
+        "
     }
 }
